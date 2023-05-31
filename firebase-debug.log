@@ -1,0 +1,146 @@
+[debug] [2023-05-29T13:59:17.619Z] ----------------------------------------------------------------------
+[debug] [2023-05-29T13:59:17.620Z] Command:       /opt/homebrew/Cellar/node/18.0.0/bin/node /opt/homebrew/bin/firebase init functions
+[debug] [2023-05-29T13:59:17.620Z] CLI Version:   12.2.1
+[debug] [2023-05-29T13:59:17.620Z] Platform:      darwin
+[debug] [2023-05-29T13:59:17.620Z] Node Version:  v18.0.0
+[debug] [2023-05-29T13:59:17.622Z] Time:          Mon May 29 2023 17:59:17 GMT+0400 (Georgia Standard Time)
+[debug] [2023-05-29T13:59:17.622Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-29T13:59:17.656Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-29T13:59:17.656Z] > authorizing via signed-in user (zosiashviligiorgi1@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/giorgizosiashvili/Desktop/React-Native/Projects/MealsToGo
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-05-29T13:59:17.657Z] Using project from CLI flag: fooddelivery-b9acf
+[debug] [2023-05-29T13:59:17.658Z] > refreshing access token with scopes: []
+[debug] [2023-05-29T13:59:17.659Z] >>> [apiv2][query] POST https://www.googleapis.com/oauth2/v3/token [none]
+[debug] [2023-05-29T13:59:17.659Z] >>> [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-29T13:59:17.941Z] <<< [apiv2][status] POST https://www.googleapis.com/oauth2/v3/token 200
+[debug] [2023-05-29T13:59:17.941Z] <<< [apiv2][body] POST https://www.googleapis.com/oauth2/v3/token [omitted]
+[debug] [2023-05-29T13:59:17.961Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fooddelivery-b9acf [none]
+[debug] [2023-05-29T13:59:18.365Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fooddelivery-b9acf 200
+[debug] [2023-05-29T13:59:18.365Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fooddelivery-b9acf {"projectId":"fooddelivery-b9acf","projectNumber":"287027199249","displayName":"FoodDelivery","name":"projects/fooddelivery-b9acf","resources":{"hostingSite":"fooddelivery-b9acf"},"state":"ACTIVE","etag":"1_8082b88f-85c7-493d-bdbd-28765cf56ec0"}
+[info] i  Using project fooddelivery-b9acf (FoodDelivery) 
+[info] 
+=== Functions Setup
+[debug] [2023-05-29T13:59:18.371Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-29T13:59:18.371Z] > authorizing via signed-in user (zosiashviligiorgi1@gmail.com)
+[debug] [2023-05-29T13:59:18.371Z] [iam] checking project fooddelivery-b9acf for permissions ["firebase.projects.get"]
+[debug] [2023-05-29T13:59:18.371Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions [none]
+[debug] [2023-05-29T13:59:18.371Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions x-goog-quota-user=projects/fooddelivery-b9acf
+[debug] [2023-05-29T13:59:18.371Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-05-29T13:59:19.457Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions 200
+[debug] [2023-05-29T13:59:19.457Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-05-29T13:59:19.458Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-05-29T13:59:19.458Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/fooddelivery-b9acf
+[debug] [2023-05-29T13:59:19.460Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-05-29T13:59:19.460Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/fooddelivery-b9acf
+[debug] [2023-05-29T13:59:20.679Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com 200
+[debug] [2023-05-29T13:59:20.679Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com [omitted]
+[debug] [2023-05-29T13:59:20.695Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com 200
+[debug] [2023-05-29T13:59:20.695Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
+[info] 
+Overwriting codebase default...
+
+[info] ✔  Wrote functions/package.json 
+[info] ✔  Wrote functions/index.js 
+[info] ✔  Wrote functions/.gitignore 
+[info] 
+[info] i  Writing configuration info to firebase.json... 
+[debug] [2023-05-29T14:01:12.745Z] Error: EACCES: permission denied, open '/Users/giorgizosiashvili/Desktop/React-Native/Projects/MealsToGo/firebase.json'
+    at Object.openSync (node:fs:590:3)
+    at Object.writeFileSync (node:fs:2184:35)
+    at Config.writeProjectFile (/opt/homebrew/lib/node_modules/firebase-tools/lib/config.js:153:12)
+    at /opt/homebrew/lib/node_modules/firebase-tools/lib/commands/init.js:176:16
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+[error] 
+[error] Error: An unexpected error has occurred.
+[debug] [2023-05-29T14:01:17.943Z] ----------------------------------------------------------------------
+[debug] [2023-05-29T14:01:17.944Z] Command:       /opt/homebrew/Cellar/node/18.0.0/bin/node /opt/homebrew/bin/firebase init functions
+[debug] [2023-05-29T14:01:17.944Z] CLI Version:   12.2.1
+[debug] [2023-05-29T14:01:17.944Z] Platform:      darwin
+[debug] [2023-05-29T14:01:17.944Z] Node Version:  v18.0.0
+[debug] [2023-05-29T14:01:17.945Z] Time:          Mon May 29 2023 18:01:17 GMT+0400 (Georgia Standard Time)
+[debug] [2023-05-29T14:01:17.945Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2023-05-29T14:01:17.979Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-29T14:01:17.979Z] > authorizing via signed-in user (zosiashviligiorgi1@gmail.com)
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /Users/giorgizosiashvili/Desktop/React-Native/Projects/MealsToGo
+
+Before we get started, keep in mind:
+
+  * You are initializing within an existing Firebase project directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2023-05-29T14:01:17.981Z] Using project from CLI flag: fooddelivery-b9acf
+[debug] [2023-05-29T14:01:17.982Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/fooddelivery-b9acf [none]
+[debug] [2023-05-29T14:01:19.342Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/fooddelivery-b9acf 200
+[debug] [2023-05-29T14:01:19.342Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/fooddelivery-b9acf {"projectId":"fooddelivery-b9acf","projectNumber":"287027199249","displayName":"FoodDelivery","name":"projects/fooddelivery-b9acf","resources":{"hostingSite":"fooddelivery-b9acf"},"state":"ACTIVE","etag":"1_8082b88f-85c7-493d-bdbd-28765cf56ec0"}
+[info] i  Using project fooddelivery-b9acf (FoodDelivery) 
+[info] 
+=== Functions Setup
+[debug] [2023-05-29T14:01:19.351Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2023-05-29T14:01:19.351Z] > authorizing via signed-in user (zosiashviligiorgi1@gmail.com)
+[debug] [2023-05-29T14:01:19.351Z] [iam] checking project fooddelivery-b9acf for permissions ["firebase.projects.get"]
+[debug] [2023-05-29T14:01:19.352Z] >>> [apiv2][query] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions [none]
+[debug] [2023-05-29T14:01:19.352Z] >>> [apiv2][(partial)header] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions x-goog-quota-user=projects/fooddelivery-b9acf
+[debug] [2023-05-29T14:01:19.352Z] >>> [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-05-29T14:01:21.286Z] <<< [apiv2][status] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions 200
+[debug] [2023-05-29T14:01:21.286Z] <<< [apiv2][body] POST https://cloudresourcemanager.googleapis.com/v1/projects/fooddelivery-b9acf:testIamPermissions {"permissions":["firebase.projects.get"]}
+[debug] [2023-05-29T14:01:21.287Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com [none]
+[debug] [2023-05-29T14:01:21.287Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com x-goog-quota-user=projects/fooddelivery-b9acf
+[debug] [2023-05-29T14:01:21.288Z] >>> [apiv2][query] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com [none]
+[debug] [2023-05-29T14:01:21.289Z] >>> [apiv2][(partial)header] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com x-goog-quota-user=projects/fooddelivery-b9acf
+[debug] [2023-05-29T14:01:22.825Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com 200
+[debug] [2023-05-29T14:01:22.825Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/runtimeconfig.googleapis.com [omitted]
+[debug] [2023-05-29T14:01:22.826Z] <<< [apiv2][status] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com 200
+[debug] [2023-05-29T14:01:22.826Z] <<< [apiv2][body] GET https://serviceusage.googleapis.com/v1/projects/fooddelivery-b9acf/services/cloudfunctions.googleapis.com [omitted]
+[info] 
+Detected existing codebase(s): default
+
+[info] Let's create a new codebase for your functions.
+[info] A directory corresponding to the codebase will be created in your project
+[info] with sample code pre-configured.
+
+[info] See https://firebase.google.com/docs/functions/organize-functions for
+[info] more information on organizing your functions using codebases.
+
+[info] Functions can be deployed with firebase deploy.
+
