@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   createUserWithEmailAndPassword,
+  deleteUser,
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
@@ -14,7 +15,6 @@ export const AuthenticationContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const auth = getAuth();
-
   const saveUserToStorage = async (user) => {
     try {
       const userJson = JSON.stringify(user);
@@ -46,7 +46,6 @@ export const AuthenticationContextProvider = ({ children }) => {
     }
   };
 
-  // Call initializeApp when the component mounts
   useEffect(() => {
     initializeApp();
   }, []);
@@ -93,7 +92,18 @@ export const AuthenticationContextProvider = ({ children }) => {
         setError(error.message);
       });
   };
-
+  const onRemoveAccount = () => {
+    const user = auth.currentUser;
+    deleteUser(user)
+      .then(() => {
+        setUser(null);
+        setIsLoading(false);
+        console.log("User deleted");
+      })
+      .catch((error) => {
+        console.log("error");
+      });
+  };
   return (
     <AuthenticationContext.Provider
       value={{
@@ -104,6 +114,7 @@ export const AuthenticationContextProvider = ({ children }) => {
         onRegister,
         onLogout,
         user,
+        onRemoveAccount,
       }}
     >
       {children}

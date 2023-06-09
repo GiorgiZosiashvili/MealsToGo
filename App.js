@@ -10,9 +10,9 @@ import {
   Oswald_400Regular,
 } from "@expo-google-fonts/oswald";
 import { useFonts as useLato, Lato_400Regular } from "@expo-google-fonts/lato";
-import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 import Navigation from "./src/infrastructure/navigation";
 import { AuthenticationContextProvider } from "./src/services/authentication/authentication.context";
+import { DarkModeProvider } from "./src/services/darkTheme/theme.context";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDlHhLBT7-qQkG8oy3j-OPuf-7rmUvhhG4",
@@ -37,12 +37,13 @@ const App = () => {
 
   return (
     <View>
-      <ExpoStatusBar style="dark" />
-      <AuthenticationContextProvider>
-        <ThemeProvider theme={theme}>
-          <Navigation />
-        </ThemeProvider>
-      </AuthenticationContextProvider>
+      <DarkModeProvider>
+        <AuthenticationContextProvider>
+          <ThemeProvider theme={theme}>
+            <Navigation />
+          </ThemeProvider>
+        </AuthenticationContextProvider>
+      </DarkModeProvider>
     </View>
   );
 };

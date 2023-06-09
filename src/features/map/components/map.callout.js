@@ -1,16 +1,23 @@
 import { View } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components/native";
 
 import WebView from "react-native-webview";
 import { Platform } from "react-native";
+import { DarkModeContext } from "../../../services/darkTheme/theme.context";
 const isAndroid = Platform.OS === "android";
 const CompactRestaurantInfo = ({ restaurant, isMap }) => {
+  const { darkTheme } = useContext(DarkModeContext);
   const Image = isAndroid && isMap ? CompactWebView : CompactImage;
   return (
     <CompactRestaurantContainer>
       <Image source={{ uri: restaurant.photos[0] }} />
-      <CompactTitle numberOfLines={1}>{restaurant.name}</CompactTitle>
+      <CompactTitle
+        style={{ color: darkTheme === "dark" ? "#fff" : "#111" }}
+        numberOfLines={1}
+      >
+        {restaurant.name}
+      </CompactTitle>
     </CompactRestaurantContainer>
   );
 };

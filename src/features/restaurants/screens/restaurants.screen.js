@@ -9,9 +9,14 @@ import { RestaurantContext } from "../../../services/restaurants/restaurants.con
 import { FavoritesContext } from "../../../services/favorites/favorites.context";
 import FavoriteView from "../../../components/favorite/favorite.view";
 import FadeInView from "../../../components/animations/fade.animation";
+import { LocationContext } from "../../../services/location/location.context";
+import { colors } from "../../../infrastructure/theme/colors";
+import { DarkModeContext } from "../../../services/darkTheme/theme.context";
 
 const RestaurantsScreen = ({ navigation }) => {
+  const { darkTheme } = useContext(DarkModeContext);
   const { restaurants, isLoading, error } = useContext(RestaurantContext);
+  const { error: locationError } = useContext(LocationContext);
   const { favorites } = useContext(FavoritesContext);
   const [showFavorite, setShowFavorite] = useState(false);
 
@@ -22,7 +27,9 @@ const RestaurantsScreen = ({ navigation }) => {
           <Loading size={70} color="red" animating={true} />
         </LoadingContainer>
       )}
-      <SafeArea style={{ backgroundColor: "#fff" }}>
+      <SafeArea
+        style={{ backgroundColor: darkTheme === "dark" ? "#111" : "#fff" }}
+      >
         <Container>
           <Search
             favorites={favorites}
@@ -36,21 +43,25 @@ const RestaurantsScreen = ({ navigation }) => {
           {showFavorite && (
             <FavoriteView navigation={navigation} favorites={favorites} />
           )}
-          <RestaurantList
-            data={restaurants}
-            keyExtractor={(item) => item.name}
-            renderItem={({ item }) => {
-              return (
-                <FadeInView>
-                  <RestaurantInfoCard
-                    isHome
-                    navigation={navigation}
-                    restaurant={item}
-                  />
-                </FadeInView>
-              );
-            }}
-          />
+          {!!error || !!locationError ? (
+            <Error>Something went wrong while retrieving the data</Error>
+          ) : (
+            <RestaurantList
+              data={restaurants}
+              keyExtractor={(item, i) => item.name + i}
+              renderItem={({ item }) => {
+                return (
+                  <FadeInView>
+                    <RestaurantInfoCard
+                      isHome
+                      navigation={navigation}
+                      restaurant={item}
+                    />
+                  </FadeInView>
+                );
+              }}
+            />
+          )}
         </Container>
       </SafeArea>
     </>
@@ -59,7 +70,6 @@ const RestaurantsScreen = ({ navigation }) => {
 //Styles
 const Container = styled.View`
   flex: 1;
-  background-color: ${(props) => props.theme.colors.bg.primary};
 `;
 const LoadingContainer = styled.View`
   position: absolute;
@@ -68,7 +78,7 @@ const LoadingContainer = styled.View`
   height: 100%;
   align-items: center;
   justify-content: center;
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(0, 0, 0, 0.2);
 `;
 
 const Loading = styled(ActivityIndicator)``;
@@ -77,5 +87,10 @@ const RestaurantList = styled(FlatList).attrs({
     paddingBottom: 50,
   },
 })``;
+const Error = styled.Text`
+  font-size: 16px;
+  margin-left: 12px;
+  color: ${colors.ui.error};
+`;
 
 export default RestaurantsScreen;

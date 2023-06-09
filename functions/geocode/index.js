@@ -1,4 +1,3 @@
-const { error } = require("console");
 const {
   locations: locationsMock,
   locations,
@@ -17,7 +16,6 @@ module.exports.geocodeRequest = (request, response, client) => {
         address: city,
         key: functions.config().google.key,
       },
-      timeout: 1000,
     })
     .then((res) => {
       return response.json(res.data);
