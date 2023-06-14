@@ -9,6 +9,7 @@ import { LocationContextProvider } from "../../services/location/location.contex
 import { SettingsNavigator } from "./settings.navigator";
 import { DarkModeContext } from "../../services/darkTheme/theme.context";
 import CheckoutScreen from "../../features/checkout/screens/checkoutScreen";
+import { CartContextProvider } from "../../services/cart/cart.context";
 const AppNavigator = () => {
   const { darkTheme } = useContext(DarkModeContext);
   const Tab = createBottomTabNavigator();
@@ -35,40 +36,48 @@ const AppNavigator = () => {
   });
 
   return (
-    <FavoritesContextProvider>
-      <LocationContextProvider>
-        <RestaurantContextProvider>
-          <Tab.Navigator screenOptions={screenOptions}>
-            <Tab.Screen
-              name="Restaurants"
-              component={RestaurantsNavigator}
-              options={{ headerShown: false, tabBarActiveTintColor: "#696AC3" }}
-            />
-            <Tab.Screen
-              name="Checkout"
-              component={CheckoutScreen}
-              options={{
-                headerShown: false,
-                tabBarActiveTintColor: "#696AC3",
-              }}
-            />
-            <Tab.Screen
-              name="Map"
-              component={MapScreen}
-              options={{
-                headerShown: false,
-                tabBarActiveTintColor: "#696AC3",
-              }}
-            />
-            <Tab.Screen
-              name="Settings"
-              component={SettingsNavigator}
-              options={{ headerShown: false, tabBarActiveTintColor: "#696AC3" }}
-            />
-          </Tab.Navigator>
-        </RestaurantContextProvider>
-      </LocationContextProvider>
-    </FavoritesContextProvider>
+    <CartContextProvider>
+      <FavoritesContextProvider>
+        <LocationContextProvider>
+          <RestaurantContextProvider>
+            <Tab.Navigator screenOptions={screenOptions}>
+              <Tab.Screen
+                name="Restaurants"
+                component={RestaurantsNavigator}
+                options={{
+                  headerShown: false,
+                  tabBarActiveTintColor: "#696AC3",
+                }}
+              />
+              <Tab.Screen
+                name="Checkout"
+                component={CheckoutScreen}
+                options={{
+                  headerShown: false,
+                  tabBarActiveTintColor: "#696AC3",
+                }}
+              />
+              <Tab.Screen
+                name="Map"
+                component={MapScreen}
+                options={{
+                  headerShown: false,
+                  tabBarActiveTintColor: "#696AC3",
+                }}
+              />
+              <Tab.Screen
+                name="Settings"
+                component={SettingsNavigator}
+                options={{
+                  headerShown: false,
+                  tabBarActiveTintColor: "#696AC3",
+                }}
+              />
+            </Tab.Navigator>
+          </RestaurantContextProvider>
+        </LocationContextProvider>
+      </FavoritesContextProvider>
+    </CartContextProvider>
   );
 };
 

@@ -2,10 +2,10 @@ import React, { useContext, useState } from "react";
 import RestaurantInfoCard from "../components/restaurant.info-card";
 import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 import styled from "styled-components/native";
-import { List } from "react-native-paper";
+import { Button, List } from "react-native-paper";
 import { DarkModeContext } from "../../../services/darkTheme/theme.context";
 import { colors } from "../../../infrastructure/theme/colors";
-
+import CartContext from "../../../services/cart/cart.context";
 const RestaurantsDetailsScreen = ({ route, navigation }) => {
   const { restaurant } = route.params;
   const [breakfastExpanded, setBreakfastExpanded] = useState(false);
@@ -13,7 +13,7 @@ const RestaurantsDetailsScreen = ({ route, navigation }) => {
   const [dinnerExpanded, setDinnerExpanded] = useState(false);
   const [drinksExpanded, setDrinksExpanded] = useState(false);
   const { darkTheme } = useContext(DarkModeContext);
-
+  const { addToCart } = useContext(CartContext);
   return (
     <Container darkTheme={darkTheme}>
       <ExpoStatusBar style={darkTheme === "dark" ? "dark" : "light"} />
@@ -29,8 +29,8 @@ const RestaurantsDetailsScreen = ({ route, navigation }) => {
         expanded={breakfastExpanded}
         onPress={() => setBreakfastExpanded(!breakfastExpanded)}
       >
-        <ListItem title="Eggs Benedict" />
-        <ListItem title="Classic Breakfast" />
+        <ListItem darkTheme={darkTheme} title="Eggs Benedict" />
+        <ListItem darkTheme={darkTheme} title="Classic Breakfast" />
       </ListAccordion>
 
       <ListAccordion
@@ -41,9 +41,9 @@ const RestaurantsDetailsScreen = ({ route, navigation }) => {
         expanded={lunchExpanded}
         onPress={() => setLunchExpanded(!lunchExpanded)}
       >
-        <ListItem title="Burger w/ Fries" />
-        <ListItem title="Steak Sandwich" />
-        <ListItem title="Mushroom Soup" />
+        <ListItem darkTheme={darkTheme} title="Burger w/ Fries" />
+        <ListItem darkTheme={darkTheme} title="Steak Sandwich" />
+        <ListItem darkTheme={darkTheme} title="Mushroom Soup" />
       </ListAccordion>
 
       <ListAccordion
@@ -53,9 +53,12 @@ const RestaurantsDetailsScreen = ({ route, navigation }) => {
         expanded={dinnerExpanded}
         onPress={() => setDinnerExpanded(!dinnerExpanded)}
       >
-        <ListItem title="Spaghetti Bolognese" />
-        <ListItem title="Veal Cutlet with Chicken Mushroom Rotini" />
-        <ListItem title="Steak Frites" />
+        <ListItem darkTheme={darkTheme} title="Spaghetti Bolognese" />
+        <ListItem
+          darkTheme={darkTheme}
+          title="Veal Cutlet with Chicken Mushroom Rotini"
+        />
+        <ListItem darkTheme={darkTheme} title="Steak Frites" />
       </ListAccordion>
 
       <ListAccordion
@@ -65,12 +68,22 @@ const RestaurantsDetailsScreen = ({ route, navigation }) => {
         expanded={drinksExpanded}
         onPress={() => setDrinksExpanded(!drinksExpanded)}
       >
-        <ListItem title="Coffee" />
-        <ListItem title="Tea" />
-        <ListItem title="Modelo" />
-        <ListItem title="Coke" />
-        <ListItem title="Fanta" />
+        <ListItem darkTheme={darkTheme} title="Coffee" />
+        <ListItem darkTheme={darkTheme} title="Tea" />
+        <ListItem darkTheme={darkTheme} title="Modelo" />
+        <ListItem darkTheme={darkTheme} title="Coke" />
+        <ListItem darkTheme={darkTheme} title="Fanta" />
       </ListAccordion>
+      <OrderButton
+        icon="cash"
+        mode="contained"
+        onPress={() => {
+          addToCart({ item: "spacial", price: 1299 }, restaurant);
+          navigation.navigate("Checkout");
+        }}
+      >
+        Order special only for 12.99$
+      </OrderButton>
     </Container>
   );
 };
@@ -90,8 +103,19 @@ const ListAccordion = styled(List.Accordion).attrs(({ darkTheme }) => ({
   background-color: ${(props) =>
     props.darkTheme === "dark" ? colors.bg.black : colors.bg.primary};
 `;
-const ListItem = styled(List.Item).attrs(({ darkTheme }) => ({
-  titleStyle: {
-    color: darkTheme === "dark" ? colors.bg.black : colors.bg.primary,
-  },
-}))``;
+const ListItem = styled(List.Item).attrs(({ darkTheme }) => {
+  console.log(darkTheme);
+  return {
+    titleStyle: {
+      color: darkTheme !== "dark" ? colors.bg.black : colors.bg.primary,
+    },
+  };
+})``;
+const OrderButton = styled(Button).attrs({
+  color: colors.brand.primary,
+})`
+  padding: ${(props) => props.theme.space[2]};
+  align-self: center;
+  width: 80%;
+  margin-top: 130px;
+`;
