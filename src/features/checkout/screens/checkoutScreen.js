@@ -10,7 +10,9 @@ import { Text } from "../../../components/typography";
 import RestaurantInfoCard from "../../restaurants/components/restaurant.info-card";
 import { List } from "react-native-paper";
 import { colors } from "../../../infrastructure/theme/colors";
+import { DarkModeContext } from "../../../services/darkTheme/theme.context";
 const CheckoutScreen = ({ navigation }) => {
+  const { darkTheme } = useContext(DarkModeContext);
   const { cart, restaurant, clearCart, sum } = useContext(CartContext);
   const [name, setName] = useState(null);
   const [card, setCard] = useState(null);
@@ -28,32 +30,60 @@ const CheckoutScreen = ({ navigation }) => {
 
   if (!cart.length || !restaurant) {
     return (
-      <SafeArea>
-        <CartIconContainer>
+      <SafeArea
+        style={{
+          backgroundColor:
+            darkTheme === "dark" ? colors.bg.black : colors.bg.primary,
+        }}
+      >
+        <CartIconContainer darkTheme={darkTheme}>
           <CartIcon icon="cart-off" />
-          <Text>Your card it empty!</Text>
+          <Text
+            style={{
+              color: darkTheme === "dark" ? colors.bg.primary : colors.bg.black,
+            }}
+          >
+            Your card it empty!
+          </Text>
         </CartIconContainer>
       </SafeArea>
     );
   } else {
     return (
-      <Container>
+      <Container darkTheme={darkTheme}>
         <ExpoStatusBar style="dark" />
         <SafeArea>
           <RestaurantInfoCard restaurant={restaurant} />
           <TextContainer>
-            <Text>Your Order:</Text>
+            <Text
+              style={{
+                color:
+                  darkTheme === "dark" ? colors.bg.primary : colors.bg.black,
+              }}
+            >
+              Your Order:
+            </Text>
             <List.Section>
               {cart.map(({ item, price }, i) => {
                 return (
                   <List.Item
                     key={item + i}
                     title={`${item} - ${price / 100 + "$"}`}
+                    titleStyle={{
+                      color: colors.bg.gray,
+                    }}
                   />
                 );
               })}
             </List.Section>
-            <Text>Total: {sum}</Text>
+            <Text
+              style={{
+                color:
+                  darkTheme === "dark" ? colors.bg.primary : colors.bg.black,
+              }}
+            >
+              Total: {sum}
+            </Text>
           </TextContainer>
           <NameInput
             label="Name"
@@ -123,6 +153,8 @@ const CartIconContainer = styled.View`
   flex: 1;
   align-items: center;
   justify-content: center;
+  background-color: ${(props) =>
+    props.darkTheme === "dark" ? colors.bg.black : colors.bg.primary};
 `;
 const CartIcon = styled(Avatar.Icon).attrs({
   size: 160,
@@ -130,7 +162,11 @@ const CartIcon = styled(Avatar.Icon).attrs({
 const TextContainer = styled.View`
   padding-horizontal: ${(props) => props.theme.space[2]};
 `;
-const NameInput = styled(TextInput)`
+const NameInput = styled(TextInput).attrs({
+  textColor: colors.bg.gray,
+  outlineColor: colors.bg.gray,
+  contentStyle: colors.bg.gray,
+})`
   background-color: null;
   margin-horizontal: ${(props) => props.theme.space[2]};
 `;
