@@ -36,6 +36,7 @@ const CheckoutScreen = ({ navigation }) => {
             darkTheme === "dark" ? colors.bg.black : colors.bg.primary,
         }}
       >
+        <ExpoStatusBar style={darkTheme !== "dark" ? "dark" : "light"} />
         <CartIconContainer darkTheme={darkTheme}>
           <CartIcon icon="cart-off" />
           <Text
@@ -51,7 +52,7 @@ const CheckoutScreen = ({ navigation }) => {
   } else {
     return (
       <Container darkTheme={darkTheme}>
-        <ExpoStatusBar style="dark" />
+        <ExpoStatusBar style={darkTheme !== "dark" ? "dark" : "light"} />
         <SafeArea>
           <RestaurantInfoCard restaurant={restaurant} />
           <TextContainer>
@@ -129,6 +130,8 @@ const CheckoutScreen = ({ navigation }) => {
 };
 const Container = styled.View`
   flex: 1;
+  background-color: ${(props) =>
+    props.darkTheme === "dark" ? colors.bg.black : colors.bg.primary};
 `;
 const Clear = styled(Button).attrs({
   textColor: colors.bg.primary,

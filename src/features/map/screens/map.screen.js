@@ -8,13 +8,15 @@ import { RestaurantContext } from "../../../services/restaurants/restaurants.con
 import CompactRestaurantInfo from "../components/map.callout";
 import { DarkModeContext } from "../../../services/darkTheme/theme.context";
 import { darkMapStyle, lightMapStyle } from "../components/mapStyles";
+import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 
 const screenHeight = Dimensions.get("screen").height;
 const windowWidth = Dimensions.get("window").width;
-const RestaurantsMap = ({ navigation, location, darkTheme }) => {
+const RestaurantsMap = ({ navigation, location }) => {
   const { restaurants = [] } = useContext(RestaurantContext);
   const [latDelta, setLatDelta] = useState(0);
   const { lat, lng, viewport } = location;
+  const { darkTheme } = useContext(DarkModeContext);
 
   useEffect(() => {
     const northeastLat = viewport.northeast.lat;
@@ -23,42 +25,44 @@ const RestaurantsMap = ({ navigation, location, darkTheme }) => {
   }, [location]);
 
   return (
-    <Container>
-      <Search />
-      <Map
-        provider={PROVIDER_GOOGLE}
-        darkTheme={darkTheme}
-        region={{
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: latDelta,
-          longitudeDelta: 0.01,
-        }}
-        customMapStyle={darkTheme === "dark" ? darkMapStyle : null}
-      >
-        {restaurants.map((restaurant, i) => {
-          return (
-            <MapMarker
-              image={require("../../../../assets/marker.png")}
-              key={restaurant.name + i}
-              title={restaurant.name}
-              coordinate={{
-                latitude: restaurant.geometry.location.lat,
-                longitude: restaurant.geometry.location.lng,
-              }}
-            >
-              <Callout
-                onPress={() => {
-                  navigation.navigate("RestaurantDetail", { restaurant });
+    <>
+      <ExpoStatusBar style={darkTheme !== "dark" ? "dark" : "light"} />
+      <Container>
+        <Search />
+        <Map
+          provider={PROVIDER_GOOGLE}
+          region={{
+            latitude: lat,
+            longitude: lng,
+            latitudeDelta: latDelta,
+            longitudeDelta: 0.01,
+          }}
+          customMapStyle={darkTheme === "dark" ? darkMapStyle : null}
+        >
+          {restaurants.map((restaurant, i) => {
+            return (
+              <MapMarker
+                image={require("../../../../assets/marker.png")}
+                key={restaurant.name + i}
+                title={restaurant.name}
+                coordinate={{
+                  latitude: restaurant.geometry.location.lat,
+                  longitude: restaurant.geometry.location.lng,
                 }}
               >
-                <CompactRestaurantInfo restaurant={restaurant} isMap />
-              </Callout>
-            </MapMarker>
-          );
-        })}
-      </Map>
-    </Container>
+                <Callout
+                  onPress={() => {
+                    navigation.navigate("RestaurantDetail", { restaurant });
+                  }}
+                >
+                  <CompactRestaurantInfo restaurant={restaurant} isMap />
+                </Callout>
+              </MapMarker>
+            );
+          })}
+        </Map>
+      </Container>
+    </>
   );
 };
 

@@ -27,7 +27,6 @@ if (!getApps.length) {
 }
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [oswaldLoaded] = useOswald({ Oswald_400Regular });
   const [latoLoaded] = useLato({ Lato_400Regular });
 
