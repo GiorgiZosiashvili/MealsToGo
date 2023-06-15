@@ -48,7 +48,7 @@ const RestaurantsScreen = ({ navigation }) => {
           ) : (
             <RestaurantList
               data={restaurants}
-              keyExtractor={(item, i) => item.name + i}
+              keyExtractor={(item) => item.placeId}
               renderItem={({ item }) => {
                 return (
                   <FadeInView>

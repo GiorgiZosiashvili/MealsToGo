@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import CreditCardInput from "../components/credit-card.component";
 import styled from "styled-components/native";
 import { SafeArea } from "../../../components/utility/safe-area.component";
@@ -6,7 +6,6 @@ import ExpoStatusBar from "expo-status-bar/build/ExpoStatusBar";
 import CartContext from "../../../services/cart/cart.context";
 import { Avatar, TextInput } from "react-native-paper";
 import { Button } from "react-native-paper";
-import { payRequest } from "../../../services/checkout/checkout.services";
 import { Text } from "../../../components/typography";
 import RestaurantInfoCard from "../../restaurants/components/restaurant.info-card";
 import { List } from "react-native-paper";
@@ -15,13 +14,16 @@ const CheckoutScreen = ({ navigation }) => {
   const { cart, restaurant, clearCart, sum } = useContext(CartContext);
   const [name, setName] = useState(null);
   const [card, setCard] = useState(null);
-  console.log("card", card);
+
   const onPay = () => {
     if (!card || !card.id) {
       console.log("some error");
       return;
     }
-    payRequest(card.id, sum, name);
+    navigation.navigate("SuccessScreen");
+    setCard(null);
+    clearCart();
+    setName(null);
   };
 
   if (!cart.length || !restaurant) {
@@ -66,6 +68,11 @@ const CheckoutScreen = ({ navigation }) => {
           />
           {name?.length > 0 && (
             <CreditCardInput name={name} onSuccess={setCard} />
+          )}
+          {!card?.id && (
+            <Text style={{ color: colors.text.error, marginLeft: 8 }}>
+              Please fill the card information
+            </Text>
           )}
           <Pay
             icon="cash"

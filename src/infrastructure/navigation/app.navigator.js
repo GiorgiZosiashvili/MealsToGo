@@ -8,8 +8,8 @@ import { RestaurantContextProvider } from "../../services/restaurants/restaurant
 import { LocationContextProvider } from "../../services/location/location.context";
 import { SettingsNavigator } from "./settings.navigator";
 import { DarkModeContext } from "../../services/darkTheme/theme.context";
-import CheckoutScreen from "../../features/checkout/screens/checkoutScreen";
 import { CartContextProvider } from "../../services/cart/cart.context";
+import CheckOutNavigator from "./checkOutNavigator.navigator";
 const AppNavigator = () => {
   const { darkTheme } = useContext(DarkModeContext);
   const Tab = createBottomTabNavigator();
@@ -51,7 +51,7 @@ const AppNavigator = () => {
               />
               <Tab.Screen
                 name="Checkout"
-                component={CheckoutScreen}
+                component={CheckOutNavigator}
                 options={{
                   headerShown: false,
                   tabBarActiveTintColor: "#696AC3",

@@ -104,7 +104,6 @@ const ListAccordion = styled(List.Accordion).attrs(({ darkTheme }) => ({
     props.darkTheme === "dark" ? colors.bg.black : colors.bg.primary};
 `;
 const ListItem = styled(List.Item).attrs(({ darkTheme }) => {
-  console.log(darkTheme);
   return {
     titleStyle: {
       color: darkTheme !== "dark" ? colors.bg.black : colors.bg.primary,

@@ -19,7 +19,7 @@ const RestaurantInfoCard = ({ restaurant = {}, isHome, navigation }) => {
     ],
     address = "100 some random street",
     isOpenNow = true,
-    rating = 4.3,
+    rating,
     placeId,
   } = restaurant;
   const ratingArray = Array.from(new Array(Math.round(rating)));
